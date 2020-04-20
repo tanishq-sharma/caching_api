@@ -22,8 +22,7 @@ type Node_json struct {
 	Value T `json:"Value"`
 }
 
-type NodeWithState_json struct {
-	ID T `json:"ID"`
-	Value T `json:"Value"`
+type State_json struct {
+
 	State T `json: "State"`
 }

@@ -21,6 +21,9 @@ func Get(w http.ResponseWriter, r *http.Request){
 	initialize.HandleGet(w,r)
 }
 
+func State(w http.ResponseWriter,r *http.Request){
+	initialize.HandleState(w,r)
+}
 
 func StartServer(){
 	initialize.Initialize()
@@ -28,6 +31,8 @@ func StartServer(){
 	router.HandleFunc("/",homeLink)
 	router.HandleFunc("/cache/set",Set).Methods("POST")
 	router.HandleFunc("/cache/get/{id}",Get)
+	router.HandleFunc("/cache/state",State)
 	log.Fatal(http.ListenAndServe(":8080",router))
 	
 }
+
