@@ -36,17 +36,23 @@ func HandleGet(w http.ResponseWriter,r *http.Request){
 */
 	id:= mux.Vars(r)["id"]	
 	val, ok := C.Get(id,w,r)
-	var newElement datastructures.NodeWithState_json
+	var newElement datastructures.Node_json
 	if ok==true{											
 		newElement.ID=id
 		newElement.Value=val;
 	}
-	newElement.State = 	C.Dump()
 
-	//w.WriteHeader( http.StatusCreated )
 	json.NewEncoder(w).Encode(newElement)
 		w.WriteHeader( http.StatusCreated )
 }
+
+func HandleState(w http.ResponseWriter,r *http.Request){
+	var currentState datastructures.State_json
+	currentState.State = C.Dump();
+	json.NewEncoder(w).Encode(currentState)
+		w.WriteHeader( http.StatusCreated )
+}
+
 
 func Initialize(){
 	fmt.Printf("Enter the size of LRU cache : ")
@@ -56,3 +62,4 @@ func Initialize(){
 	fmt.Printf("LRU cache of size %v has been created  \n ",count)
 
 }
+
