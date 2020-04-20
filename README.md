@@ -25,6 +25,6 @@ state 		/cache/state
 ```
 
 # To-Do
-1.Add API support for current state.
-2.Implement GUI.
-3.Add support for more caching algorithms.
+* Add API support for current state.
+* Implement GUI.
+* Add support for more caching algorithms.
