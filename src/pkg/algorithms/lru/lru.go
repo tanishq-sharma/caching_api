@@ -3,8 +3,9 @@ package lru
 import (
 	"net/http"
 	"container/list"
-//	"fmt"
+
 )
+
 
 type T interface{}
 // Element has key and value
@@ -39,18 +40,18 @@ func (l *LRU) Set(ID T, val T) {
 	if e, ok := l.cache[ID]; ok {
 		e.Value = el
 		l.link.MoveToFront(e)
-		return 
+		return
 	}
 	if len(l.cache) < l.size {
 		l.cache[ID] = l.link.PushFront(el)
-		return 
+		return
 
 	}
 	e := l.link.Back()
 	delete(l.cache, e.Value.(Element).ID)
 	l.link.Remove(e)
 	l.cache[ID] = l.link.PushFront(el)
-	return 
+	return
 }
 
 // Get gets a value from the cache
@@ -66,24 +67,19 @@ func (l *LRU) Get(ID T,w http.ResponseWriter, r *http.Request) (T, bool) {
 }
 
 // dump dumps cache content for debugging
-func (l *LRU) Dump() (string) {
+func (l *LRU) Dump() ([]T) {
 	e := l.link.Back()
-	var state string
-	state=""
-	state+="|"
+	var state []T
+
 	for i := 0; i < l.size; i++ {
 		var ID T
-		ID = " "
 		if e != nil {
 			ID = e.Value.(Element).ID
 			e = e.Prev()
 		}
 	if ID != nil{
-	state += " "+ID.(string)+" |"}
-	if ID == nil {
-		state += " "+" |"
+state = append(state,ID);
 	}
-	}
-	
+}
 return state
 }

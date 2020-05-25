@@ -9,6 +9,11 @@ type Element struct {
 	Value T
 }
 
+type Object struct {
+Value T
+}
+
+
 type Map map[T]*list.Element
 
 type Lru struct {
@@ -24,5 +29,10 @@ type Node_json struct {
 
 type State_json struct {
 
-	State T `json: "State"`
+	State []T `json: "State"`
+}
+
+type Size_json struct {
+
+	Size T `json: "Size"`
 }

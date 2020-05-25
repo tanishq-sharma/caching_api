@@ -1,0 +1,139 @@
+file structure
+	-build
+		-react frontend
+	-scripts
+		-postdata.py
+	-src
+	|---pkg
+		|---algorithms
+		|	|---lru.go
+		|---database
+		|	|---ConnectDB.go
+		|	|---crud.go
+		|---datastructures
+		|	|---datastructure.go
+		|---handlers
+		|	|---lruHandlers
+		|	|	|---initialize.go
+		|	|	|---lruHandler.go
+		|---server
+			|---server.go
+
+
+
+Build -
+
+
+-scripts
+		-postdata.py
+
+:python scripts to post sample data to the api 
+
+
+|---algorithms
+	|---lru.go
+
+-func New()
+	New returns new LRU cache of the given size
+
+-func (l *LRU) Set(ID T, val T) 
+	Set sets the given key,value pair in the cache.
+	Returns true if new value is set in the cache.
+
+
+-func (l *LRU) Get(ID T,w http.ResponseWriter, r *http.Request) (T, bool)
+	return value and true/false for a key given as input
+
+-func (l *LRU) Dump() ([]T)
+	return the current state ofkeys present on the cache
+
+
+|---database
+	|---ConnectDB.go
+
+-func getDbUrl() string
+	set the url for postgresql (custom rl or from environment variables)
+
+-func ConnectToDB()
+	connect to database on the url returned by getDBurl()
+
+-func  exportDb() *sql.DB
+	-export the db coonection to other function to work on db .
+	-though the golabal variable db can be accesed from the files in current package 
+		this method allows to pass db only to functions which call it . t
+		hus enabling to use same connection by all the crud methods
+
+
+
+	|---crud.go
+
+-func SetToDB(key T,value T)
+	write key value pairs to db . same key already exists then update its value .
+
+-func GetFromDB(key T) (error, T)
+	-fetch vaue of a key from the db
+
+-func CreateTable()
+	method alled once when connecting to db to create table cache 
+	if it already does nots exists
+
+
+|---datastructures
+	collection of structs used across the project to prevent the redeclaration of the objects of similar structs.
+
+
+ |---handlers
+		|	|---lruHandlers
+		|	|	|---initialize.go
+
+-func Initialize() 
+	-initialize a cache of size 1 . with defaul
+	key-value pair as empty-empty .
+	this pair is not stored in db .
+
+-func SetNewSize(size int)
+	-re-instantiate the cache with size set by client
+	(this also resets the cache )
+
+ |	|	|---lruHandler.go
+
+-func HandleSize(w http.ResponseWriter,r *http.Request)
+
+	-calls method SetNewSize(size int) with the size given by user (via api).
+
+-func HandleSet(w http.ResponseWriter,r *http.Request)
+	-calls cache.SET() and Database.SetToDb() to set the key-value pair into the cache and db . 
+
+-func HandleGet(w http.ResponseWriter,r *http.Request)
+	-fetches value for a key 
+	- first searches in the cache , if it return false , then searches in the database .
+	returns null if key does not exists .
+
+	-calls Cache.Get() and  database.GetFromDB()
+
+-func HandleState(w http.ResponseWriter,r *http.Request)
+	-calls Cache.Dump() returns the current state.
+
+
+|---server
+			|---server.go
+
+-func homeLink(w http.ResponseWriter, r *http.Request) 
+	- serves the build version of  react frontend
+
+- few functions to call respective handlers for various api endpoints .
+
+-func getPort() string
+	-get port from env else set to 8080
+
+-func StartServer()
+	-initialize cache
+	-connect to database
+	- map  end-points to handlers
+	- serve frontend
+	- add CORS functionality
+	- start server.
+
+
+Main.go
+ call startserver from server.go

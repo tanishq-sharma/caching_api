@@ -1,5 +1,5 @@
 import requests
-url = 'http://localhost:8080/cache/set'
+url = 'http://localhost:8082/cache/set'
 payload = {'ID':'1','Value':'first value'}
 
 #r = requests.get(url)
@@ -20,5 +20,10 @@ payload = {'ID':'5','Value':'5 value'}
 r = requests.post(url, data = json.dumps(payload))
 payload = {'ID':'6','Value':'6 value'}
 r = requests.post(url, data = json.dumps(payload))
+
+for i in range (100):
+    payload = {'ID':str(i),'Value': str(i) +'value'}
+    r = requests.post(url, data = json.dumps(payload))
+
 r.text
 r.status_code
