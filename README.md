@@ -28,4 +28,4 @@ state 		/cache/state
 - [x] Add API support for current state.
 - [x] Implement Front-end using react.
 - [x] Deploy
-- [] Add support for more caching algorithms.
+- [ ] Add support for more caching algorithms.
