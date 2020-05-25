@@ -6,7 +6,7 @@ This is a  HTTP server implementation of various caching algorithms. It utilizes
 First start the server
 
 ```
-go run start.go
+go run main.go
 ``` 
 Use python script to POST ID-value pairs 
 ```
