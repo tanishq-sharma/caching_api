@@ -6,7 +6,7 @@ This is a  HTTP server implementation of various caching algorithms. It utilizes
 First start the server
 
 ```
-go run start.go
+go run main.go
 ``` 
 Use python script to POST ID-value pairs 
 ```
@@ -25,6 +25,8 @@ state 		/cache/state
 ```
 
 # To-Do
-* Add API support for current state.
-* Implement GUI.
-* Add support for more caching algorithms.
+- [x] Add API support for current state.
+- [x] Implement Front-end using react.
+- [x] Deploy
+- [x] User input size of cache
+- [ ] Add support for more caching algorithms.
