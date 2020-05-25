@@ -25,6 +25,7 @@ state 		/cache/state
 ```
 
 # To-Do
-* Add API support for current state.
-* Implement GUI.
-* Add support for more caching algorithms.
+- [x] Add API support for current state.
+- [x] Implement Front-end using react.
+- [x] Deploy
+- [] Add support for more caching algorithms.
