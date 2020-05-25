@@ -1,5 +1,14 @@
 # caching_api
-This is a  HTTP server implementation of various caching algorithms. It utilizes RESTful API protocols. ID and value pairs can be of any datatype .
+- A fullstack Web-App implementing caching Routine
+- Implemented LRU (Least Recently Used) algorithm to handle the object
+replacement from the cache.
+- Developed HTTP based server implementation of connection protocol to
+enable the cache routine to listen to a particular port to enable client to interact
+with it for accessing the objects directly from the cache.
+- It utilizes RESTful API protocols
+- Developed frontend using React to access backend services and display live
+state of the cache .
+- Used Jmeter for load testing
 
 ## Live Version -> [here](http://cache-routine.herokuapp.com)
 
