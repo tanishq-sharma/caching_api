@@ -28,4 +28,5 @@ state 		/cache/state
 - [x] Add API support for current state.
 - [x] Implement Front-end using react.
 - [x] Deploy
+- [x] User input size of cache
 - [ ] Add support for more caching algorithms.
